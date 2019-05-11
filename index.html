@@ -53,149 +53,199 @@
 
 <code><h1><center><font color="MediumSeaGreen">COMPUTER BOOTED OPERATING SYSTEM: WINDOWS</h1></code></center></font>
 <div id="game">
-        <h1><span class="clicks"></span> clicks</h1>
-        <button style="width:200px;height:200px;font-size:30px;" onclick="addClick(1);">Add Click</button>
-        <div id="shop">
-            <h2>Shop</h2>
-            <h3>$<span class="money"></span></h3>
-            <div id="shop-items"></div>
+            <h1><span class="clicks"></span> clicks</h1>
+            <button style="width:200px;height:200px;font-size:30px;" onclick="addClick(1);">Add Click</button>
+            <p><span id="cps"></span></p>
+            <div id="shop">
+                <h2>Shop</h2>
+                <h3>$<span class="money"></span></h3>
+                <div id="shop-items"></div>
+            </div>
         </div>
-    </div>
-    <p>CPS stands for Clicks Per Second</p>
-    <script type="text/javascript">
-        var savedVariables = {};
+        <p>CPS stands for Clicks Per Second</p>
+        <script type="text/javascript">
+            var savedVariables = {};
 
-        var shopItems = [];
-        var shopItemsAmount = {};
-        //var speed = 1000;
+            var shopItems = [];
+            var shopItemsAmount = {};
+            //var speed = 1000;
 
-        savedVariables['clicks'] = 0;
-        savedVariables['money'] = 0;
+            savedVariables['clicks'] = 0;
+            savedVariables['money'] = 0;
 
-        // stop that once, you're done, I'm going to finish it. Alright you're done. 
+            // stop that once, you're done, I'm going to finish it. Alright you're done. 
 
-        function addClick(amount) {
-            savedVariables['clicks'] = savedVariables['clicks']+amount;
-            savedVariables['money'] = savedVariables['money']+amount;
-            update();
-        }
+            function addClick(amount) {
+                savedVariables['clicks'] = savedVariables['clicks']+amount;
+                savedVariables['money'] = savedVariables['money']+amount;
+                update();
+            }
 
-        function registerShopItem(name, price, earnings) {
-            var friendly = htmlFriendly(name);
-            if (noLoad)
-                shopItemsAmount[friendly] = 0;
-            shopItems.push([name, price, earnings, friendly]);
-            document.getElementById("shop-items").innerHTML+="<div class='shop-item'><span id='"+friendly+"-count'>0</span> <button onclick=\"shopItemClick('"+friendly+"');\">"+name+"</button> $"+price+" - "+earnings+" CPS</div>";
-        }
-        function shopItemClick(friendlyName) {
-             shopItemsAmount[friendlyName] = shopItemsAmount[friendlyName]+=1;
-             update();
-        }
-        function htmlFriendly(text) {
-            return text.replace(/\s+/g, '-').toLowerCase();
-        }
+            function registerShopItem(name, price, earnings) {
+                var friendly = htmlFriendly(name);
+                if (noLoad)
+                    shopItemsAmount[friendly] = 0;
+                shopItems.push([name, price, earnings, friendly]);
+                document.getElementById("shop-items").innerHTML+="<div class='shop-item' id='"+friendly+"-container'><span id='"+friendly+"-count'>0</span> <button id=\""+friendly+"-button\" onclick=\"shopItemClick('"+friendly+"');\">"+name+"</button> $"+price+" - "+earnings+" CPS</div>";
+            }
+            function shopItemClick(friendlyName) {
+                var item = getItemFromFriendlyName(friendlyName);
+                var price = item[1];
+                if(savedVariables['money']>=price) {
+                    shopItemsAmount[friendlyName] = shopItemsAmount[friendlyName]+=1;
+                    savedVariables['money'] = savedVariables['money'] - price;
+                }
+                update();
+            }
+            function htmlFriendly(text) {
+                return text.replace(/\s+/g, '-').toLowerCase();
+            }
 
-        /*
-        function secondEarnings(earnings) {
-            return 1000 * earnings / speed;
-        }
-        */
+            /*
+            function secondEarnings(earnings) {
+                return 1000 * earnings / speed;
+            }
+            */
 
-        setInterval(function() {
-            
-        }, 1000);
+            setInterval(function() {
+                var keys = Object.keys(shopItemsAmount);
+                for(var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    var value = shopItemsAmount[key];
+                    var item = getItemFromFriendlyName(key);
+                    var earnings = item[2];
+                    for(var j = 0; j < value; j++) {
+                        addClick(earnings);
+                    }
+                }
+            }, 1000);
 
-        function update() {
-            var keys = Object.keys(savedVariables);
-            for(var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var value = savedVariables[key];
-                var elements = document.getElementsByClassName(key);
-                for(var j = 0; j < elements.length; j++) {
-                    var element = elements[j];
-                    element.innerHTML = value;
+            function update() {
+                var keys = Object.keys(savedVariables);
+                for(var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    var value = savedVariables[key];
+                    var elements = document.getElementsByClassName(key);
+                    for(var j = 0; j < elements.length; j++) {
+                        var element = elements[j];
+                        element.innerHTML = value;
+                    }
+                }
+                var keys = Object.keys(shopItemsAmount);
+                for(var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    var value = shopItemsAmount[key];
+                    var element = document.getElementById(key+'-count');
+                    element.innerHTML=value;
+                }
+                
+                for(var i = 0; i < shopItems.length; i++) {
+                    var item = shopItems[i];
+                    buttonDisplay(item[3]);
+                }
+                
+                document.getElementById('cps').innerHTML=getCPS()+' cps';
+
+                save();
+            }
+            function getCPS() {
+                var cps = 0;
+                for(var i = 0; i < shopItems.length; i++) {
+                    var item = shopItems[i];
+                    var earnings = item[1];
+                    for(var j = 0; j < shopItemsAmount[item[3]]; j++) {
+                        cps += earnings;
+                    }
+                }
+                return cps;
+            }
+            function buttonDisplay(friendlyName) {
+                var button = document.getElementById(friendlyName+'-button');
+                var item = getItemFromFriendlyName(friendlyName);
+                var price = item[1];
+                if(savedVariables['money']>=price) {
+                    button.style.background='green';
+                }else{
+                    button.style.background='red';
                 }
             }
-            var keys = Object.keys(shopItemsAmount);
-            for(var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var value = shopItemsAmount[key];
-                var element = document.getElementById(key+'-count');
-                element.innerHTML=value;
-            }
-            save();
-        }
-        function save() {
-            var keys = Object.keys(savedVariables);
-            for(var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var value = savedVariables[key];
-                if(value==null)continue;
-                localStorage.setItem(key, value);
-            }
-            localStorage.setItem('shopItemsAmount',JSON.stringify(shopItemsAmount));
-        }
-        var noLoad = false;
-        function load() {
-            shopItemsAmount = JSON.parse(localStorage.getItem('shopItemsAmount'));
-            console.log(shopItemsAmount);
-            if(shopItemsAmount == null) {
-                shopItemsAmount = {};
-                noLoad = true;
-            }
-            
-            var keys = Object.keys(savedVariables);
-            for(var i = 0; i < keys.length; i++) {
-                var key = keys[i];
-                var variable = localStorage.getItem(key);
-                switch(typeof savedVariables[key]) {
-                    case 'string':
-                        if(variable==null) {
-                            savedVariables[key] = '';
-                            break;
-                        }
-                        savedVariables[key] = string(variable);
-                        break;
-                    case 'number':
-                        if(variable==null||isNaN(variable)) {
-                            savedVariables[key] = 0;
-                            break;
-                        }
-                        savedVariables[key] = parseInt(variable);
-                        break;
-                    case 'boolean':
-                        if(variable==null) {
-                            savedVariables[key] = false;
-                            break;
-                        }
-                        savedVariables[key] = (variable=='true');
-                        break;
-                    default:
-                        savedVariables[key] = variable;
-                        break;    
+            function getItemFromFriendlyName(friendlyName) {
+                for(var i = 0; i < shopItems.length; i++) {
+                    var shopItem = shopItems[i];
+                    if(shopItem[3]==friendlyName) {
+                        return shopItem;
+                    }
                 }
             }
+            function save() {
+                var keys = Object.keys(savedVariables);
+                for(var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    var value = savedVariables[key];
+                    if(value==null)continue;
+                    localStorage.setItem(key, value);
+                }
+                localStorage.setItem('shopItemsAmount',JSON.stringify(shopItemsAmount));
+            }
+            var noLoad = false;
+            function load() {
+                shopItemsAmount = JSON.parse(localStorage.getItem('shopItemsAmount'));
+                if(shopItemsAmount == null) {
+                    shopItemsAmount = {};
+                    noLoad = true;
+                }
+                
+                var keys = Object.keys(savedVariables);
+                for(var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    var variable = localStorage.getItem(key);
+                    switch(typeof savedVariables[key]) {
+                        case 'string':
+                            if(variable==null) {
+                                savedVariables[key] = '';
+                                break;
+                            }
+                            savedVariables[key] = string(variable);
+                            break;
+                        case 'number':
+                            if(variable==null||isNaN(variable)) {
+                                savedVariables[key] = 0;
+                                break;
+                            }
+                            savedVariables[key] = parseInt(variable);
+                            break;
+                        case 'boolean':
+                            if(variable==null) {
+                                savedVariables[key] = false;
+                                break;
+                            }
+                            savedVariables[key] = (variable=='true');
+                            break;
+                        default:
+                            savedVariables[key] = variable;
+                            break;    
+                    }
+                }
 
-            // name, price, clicks a second
-            registerShopItem("Clicker", 10, 1);
-            registerShopItem("Floppy Disk", 25, 3);
-            registerShopItem("PS2 Mouse", 40, 7);
-            registerShopItem("CD", 50, 20);
-			registerShopItem("BlockBuster Membership", 30, 60);
-            registerShopItem("Mobile Telephone", 150, 65);
-            registerShopItem("MS-Dos", 500, 75);
-            registerShopItem("Java Script pass", 1000, 100);
-            registerShopItem("Digital Camra", 5000, 500);
-            registerShopItem("Early Hacker", 150000, 300);
-			registerShopItem("Macintosh", 10000, 1000);
-            registerShopItem("Modem", 10000000, 10000);
-			registerShopItem("Personal Computer", 100000, 100000);
-           
+                // name, price, clicks a second
+                registerShopItem("Clicker", 50, 5);
+                registerShopItem("Floppy Disk", 75, 10);
+                registerShopItem("PS2 Mouse", 1000, 20);
+                registerShopItem("CD Player", 2000, 40);
+                registerShopItem("BlockBuster Membership", 3000, 60);
+                registerShopItem("Mobile Telephone", 10000, 65);
+                registerShopItem("MS-Dos", 12000, 250);
+                registerShopItem("Java Script Pass", 1500000, 750);
+                registerShopItem("Digital Camra", 50000000, 5000);
+                registerShopItem("Early Hacker", 150000000, 3000);
+                registerShopItem("Macintosh", 100000000, 1000);
+                registerShopItem("Modem", 10000000000, 10000);
+                registerShopItem("Personal Computer<", 1000000000, 1000000);
 
-            update();
-        }
-        load();
-    </script>
+                update();
+            }
+            load();
+        </script>
 
     <h1><code><center>Change Log</center></code></h1>
     <code><center><h2>Created game</h2></center></code>
@@ -213,7 +263,7 @@
       <br>
 	  
 	  <code><h2><a href="https://ddogn.github.io/HyperReferencesinHTML/">Learn to code links in html</a></h2></code>
-	  <code><h2>Game Created by <b>Drew Novak</b> With Javascript help from <strong>Owen Hobbs</strong> and variable help from <strong>Ethan Knipe</strong> and<strong> Jacob Tipple.</strong>
+	<code><h2>Game designed by <b>Drew Novak</b> With Game created by <strong>Owen Hobbs</strong> and variable help from <strong>Ethan Knipe</strong> and<strong> Jacob Tipple.</strong>
 
     
 
