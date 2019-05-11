@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Clickers 1990s</title>
+<title>Clickers 1990s<title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,13 +13,14 @@
                 color: green;
             }
             button {
-                background: green;
+                background: Black;
                 border: 0;
                 padding: 10px;
                 border-radius: 5px;
                 transition: 0.2s;
                 cursor: pointer;
                 touch-action: manipulation;
+				color: Green;
             }
             hr {
                 border: 1px solid #C8C8C8;
@@ -52,17 +53,17 @@
 <br>
 
 <code><h1><center><font color="MediumSeaGreen">COMPUTER BOOTED OPERATING SYSTEM: WINDOWS</h1></code></center></font>
-<div id="game">
+<center><div id="game">
             <h1><span class="clicks"></span> clicks</h1>
-            <button style="width:200px;height:200px;font-size:30px;" onclick="addClick(1);">Add Click</button>
-            <p><span id="cps"></span></p>
+            <button style="width:200px;height:200px;font-size:30px;" onclick="addClick(1);"><code>Get Clicks</code></button>
+            <p><span id="cps"></span></p></center>
             <div id="shop">
-                <h2>Shop</h2>
+                <h1><code>Shop</code></h1>
                 <h3>$<span class="money"></span></h3>
                 <div id="shop-items"></div>
             </div>
         </div>
-        <p>CPS stands for Clicks Per Second</p>
+        <p><code>CPS stands for Clicks Per Second</code></p>
         <script type="text/javascript">
             var savedVariables = {};
 
@@ -152,7 +153,7 @@
                 var cps = 0;
                 for(var i = 0; i < shopItems.length; i++) {
                     var item = shopItems[i];
-                    var earnings = item[2];
+                    var earnings = item[1];
                     for(var j = 0; j < shopItemsAmount[item[3]]; j++) {
                         cps += earnings;
                     }
@@ -240,20 +241,21 @@
                 registerShopItem("Early Hacker", 150000000, 3000);
                 registerShopItem("Macintosh", 100000000, 1000);
                 registerShopItem("Modem", 10000000000, 10000);
-                registerShopItem("Personal Computer<", 1000000000, 1000000);
+                registerShopItem("Personal Computer", 1000000000, 1000000);
 
                 update();
             }
             load();
         </script>
+<
 
-    <h1><code><center>Change Log</center></code></h1>
-    <code><center><h2>Created game</h2></center></code>
-    <code><h1><center>Version History</center></h1></code>
+    <h1><code>Change Log</code></h1>
+    <code><h2>Created game</h2></code>
+    <code><h1>Version History</h1></code>
 	<br>
-    <Code><h2><center><b>0.9</b> This is the first public test only featuring 2 variables</h2></Code>
+    <Code><h2><b>0.9</b> This is the first public test only featuring 2 variables</h2></Code>
 	
-    <code><h2><center><b>1.0</b> This will be released in early june under an actual proxy</h2></code>
+    <code><h2><b>1.0</b> This will be released in early june under an actual proxy</h2></code>
 <br>
 
     <code><h2><a href="hello-world.tk">Learn To code hello world!</a></h2></code>
@@ -262,8 +264,8 @@
         <code><h2><a href="clickers.ml">Our main game and its pretty good, we are keeping it current and up to date</a></h2></code>
       <br>
 	  
-	  <code><h2><a href="https://ddogn.github.io/HyperReferencesinHTML/">Learn to code links in html</a></h2></code>
-	<code><h2>Game designed by <b>Drew Novak</b> With Game created by <strong>Owen Hobbs</strong> and variable help from <strong>Ethan Knipe</strong> and<strong> Jacob Tipple.</strong>
+	  <code><h2><a href="https://ddogn.github.io/HyperReferencesinHTML/">Learn to code links in html</a></h2></code></p>
+	<code><h2>Game designed and edited by <b>Drew Novak</b> With Game created by <strong>Owen Hobbs</strong> and variable help from <strong>Ethan Knipe</strong> and<strong> Jacob Tipple.</strong>
 
     
 
