@@ -28,6 +28,7 @@
             .shop-item {
                 margin-bottom: 5px;
             }
+			.button69 {background-color: #f44336;}
         </style>
 </head>
 <body style="background-color:Black">
@@ -63,7 +64,7 @@
                 <div id="shop-items"></div>
             </div>
         </div>
-        <h2><code>CPS stands for Clicks Per Second</code></h2>
+        <h2><center><code><b>CPS stands for Clicks Per Second</b></code></center></h2>
         <script type="text/javascript">
             var savedVariables = {};
 
@@ -74,7 +75,7 @@
             savedVariables['clicks'] = 0;
             savedVariables['money'] = 0;
 
-            // stop that once, you're done, I'm going to finish it. Alright you're done. 
+            // i coded some css so im happy
 
             function addClick(amount) {
                 savedVariables['clicks'] = savedVariables['clicks']+amount;
@@ -231,11 +232,11 @@
                 // name, price, clicks a second
 				registerShopItem("Clicker", 10, 1);
                 registerShopItem("Floppy Disk", 50, 5);
-                registerShopItem("PS2 Mouse", 250, 10);
-                registerShopItem("CD Player", 500, 20);
-                registerShopItem("BlockBuster Membership", 1500, 60);
-                registerShopItem("Mobile Telephone", 2000, 65);
-                registerShopItem("MS-Dos", 12000, 100);
+                registerShopItem("PS2 Mouse", 250, 30);
+                registerShopItem("CD Player", 500, 75);
+                registerShopItem("BlockBuster Membership", 1500, 200);
+                registerShopItem("Mobile Telephone", 3000, 450);
+                registerShopItem("MS-Dos", 12000, 1000);
                 registerShopItem("Java Script Pass", 15000, 150);
                 registerShopItem("Digital Camra", 50000, 500);
                 registerShopItem("Early Hacker", 75000, 1000);
@@ -251,7 +252,6 @@
             load();
 		
         </script>
-		<button onclick="resetGame();">Reset game (don't do it cole)!</button>
 
 <center>
     <h1><code>Change Log</code></h1>
@@ -270,6 +270,7 @@
       <br>
 	  
 	  <code><h2><a href="https://ddogn.github.io/HyperReferencesinHTML/">Learn to code links in html</a></h2></code></p>
+	  <center><button onclick="resetGame();" class="button button69"><font color="black">RESET GAME (DON'T DO IT COLE!!!!!!)</font></button></center>
 	<code><h2>Game designed and edited by <b>Drew Novak</b> Codebase created by <strong>Owen Hobbs</strong> and variable help from <strong>Ethan Knipe</strong> and<strong> Jacob Tipple.</strong>
 
     
