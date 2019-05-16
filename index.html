@@ -153,7 +153,7 @@
                 var cps = 0;
                 for(var i = 0; i < shopItems.length; i++) {
                     var item = shopItems[i];
-                    var earnings = item[1];
+                    var earnings = item[2];
                     for(var j = 0; j < shopItemsAmount[item[3]]; j++) {
                         cps += earnings;
                     }
@@ -229,24 +229,29 @@
                 }
 
                 // name, price, clicks a second
-                registerShopItem("Clicker", 50, 5);
-                registerShopItem("Floppy Disk", 75, 10);
-                registerShopItem("PS2 Mouse", 1000, 20);
-                registerShopItem("CD Player", 2000, 40);
-                registerShopItem("BlockBuster Membership", 3000, 60);
-                registerShopItem("Mobile Telephone", 10000, 65);
-                registerShopItem("MS-Dos", 12000, 250);
-                registerShopItem("Java Script Pass", 1500000, 750);
-                registerShopItem("Digital Camra", 50000000, 5000);
-                registerShopItem("Early Hacker", 150000000, 3000);
-                registerShopItem("Macintosh", 100000000, 1000);
-                registerShopItem("Modem", 10000000000, 10000);
-                registerShopItem("Personal Computer", 1000000000, 1000000);
+				registerShopItem("Clicker", 10, 1);
+                registerShopItem("Floppy Disk", 50, 5);
+                registerShopItem("PS2 Mouse", 250, 10);
+                registerShopItem("CD Player", 500, 20);
+                registerShopItem("BlockBuster Membership", 1500, 60);
+                registerShopItem("Mobile Telephone", 2000, 65);
+                registerShopItem("MS-Dos", 12000, 100);
+                registerShopItem("Java Script Pass", 15000, 150);
+                registerShopItem("Digital Camra", 50000, 500);
+                registerShopItem("Early Hacker", 75000, 1000);
+                registerShopItem("Macintosh", 100000, 1500);
+                registerShopItem("Modem", 500000, 10000);
+                registerShopItem("Personal Computer", 1000000, 1000000);
 
                 update();
             }
+			
+             
+ function resetGame(){localStorage.clear();location.reload();}
             load();
+		
         </script>
+		<button onclick="resetGame();">Reset game (don't do it cole)!</button>
 
 <center>
     <h1><code>Change Log</code></h1>
