@@ -10,7 +10,7 @@
             body {
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
                 background: black;
-                color: green;
+                color: MediumSeaGreen;
             }
             button {
                 background: Black;
@@ -20,7 +20,7 @@
                 transition: 0.2s;
                 cursor: pointer;
                 touch-action: manipulation;
-				color: green;
+				color: MediumSeaGreen;
             }
             hr {
                 border: 1px solid #C8C8C8;
@@ -168,7 +168,7 @@
                 if(savedVariables['money']>=price) {
                     button.style.background='black';
                 }else{
-                    button.style.background='black';
+                    button.style.background='MediumSeaGreen';
                 }
             }
             function getItemFromFriendlyName(friendlyName) {
@@ -230,19 +230,20 @@
                 }
 
                 // name, price, clicks a second
-				registerShopItem("Clicker", 10, 1);
-                registerShopItem("Floppy Disk", 50, 5);
-                registerShopItem("PS2 Mouse", 250, 30);
-                registerShopItem("CD Player", 500, 75);
-                registerShopItem("BlockBuster Membership", 1500, 200);
-                registerShopItem("Mobile Telephone", 3000, 450);
-                registerShopItem("MS-Dos", 12000, 1000);
-                registerShopItem("Java Script Pass", 15000, 150);
-                registerShopItem("Digital Camra", 50000, 500);
-                registerShopItem("Early Hacker", 75000, 1000);
-                registerShopItem("Macintosh", 100000, 1500);
-                registerShopItem("Modem", 500000, 10000);
-                registerShopItem("Personal Computer", 1000000, 1000000);
+				registerShopItem("Clicker", 50, 1);
+                registerShopItem("Floppy Disk", 250, 5);
+                registerShopItem("PS2 Mouse", 1000, 30);
+                registerShopItem("CD Player", 1500, 75);
+                registerShopItem("BlockBuster Membership", 15000, 100);
+                registerShopItem("Mobile Telephone", 30000, 150);
+                registerShopItem("MS-Dos", 50000, 250);
+                registerShopItem("Java Script Pass", 75000, 300);
+                registerShopItem("Digital Camra", 100000, 500 );
+                registerShopItem("Early Hacker", 250000, 750);
+                registerShopItem("Macintosh", 500000, 1000);
+                registerShopItem("Modem", 1000000, 5000);
+                registerShopItem("Personal Computer", 10000000, 10000);
+				registerShopItem("God", 10000000000, 1000000);
 
                 update();
             }
