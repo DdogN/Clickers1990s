@@ -52,8 +52,8 @@
 <code><h2><center><font color="MediumSeaGreen">BOOTING UP</h2></code></center></font>
 <br>
 <br>
-
-<code><h1><center><font color="MediumSeaGreen">COMPUTER BOOTED OPERATING SYSTEM: WINDOWS</h1></code></center></font>
+<code>What are you playing on:<button onclick="mobile()">Mobile</button><button onclick="windows()">PC</button></code>
+<code><h1><center><font color="MediumSeaGreen">COMPUTER BOOTED OPERATING SYSTEM:<p id="mobile2"></p><p id="windows2"></p></h1></code></center></font>
 <center><div id="game">
             <h1><span class="clicks"></span> clicks</h1>
             <button id="clickbutton" style="width:200px;height:200px;font-size:30px;" onclick="addClick(1);"><code>Get Clicks</code></button>
@@ -66,6 +66,11 @@
         </div>
         <h2><center><code><b>CPS stands for Clicks Per Second</b></code></center></h2>
         <script type="text/javascript">
+		function windows() {
+  document.getElementById("windows2").innerHTML = "WINDOWS";
+}
+		function mobile() {
+		document.getElementById("mobile2").innerHTML = "IOS";}
             var savedVariables = {};
 
             var shopItems = [];
